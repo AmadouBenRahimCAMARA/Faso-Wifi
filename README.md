@@ -1,67 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Faso Wifi - Système de Gestion de Tickets WiFi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Faso Wifi est une application web conçue pour gérer la vente de tickets d'accès WiFi. Elle permet aux administrateurs de superviser les points d'accès, de définir des tarifs, de générer des tickets, de suivre les paiements et de gérer les utilisateurs.
 
-## About Laravel
+## Fonctionnalités Principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Gestion des Utilisateurs :** Inscription, connexion et gestion des comptes utilisateurs avec différents niveaux de droits.
+- **Gestion des Points d'Accès WiFi :** CRUD (Créer, Lire, Mettre à jour, Supprimer) pour les différents sites ou zones WiFi.
+- **Gestion des Tarifs :** CRUD pour les plans tarifaires (par exemple, par heure, par jour, par volume de données) associés à chaque point d'accès.
+- **Gestion des Tickets :**
+    - Génération de tickets individuels ou en masse.
+    - Importation de listes de tickets depuis des fichiers (CSV/Excel).
+    - Suivi de l'état des tickets (utilisé, non utilisé, expiré).
+- **Système de Paiement :**
+    - Intégration de solutions de paiement mobile pour l'achat de tickets.
+    - Suivi des transactions et génération de reçus.
+- **Génération de PDF :** Création de reçus de paiement au format PDF pour les clients.
+- **Gestion des Retraits :** Permet de suivre et de gérer les retraits de fonds effectués.
+- **Tableau de Bord :** Une interface d'administration pour visualiser les statistiques de ventes et l'état du système.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technologies et Dépendances
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Framework :** [Laravel 9](https://laravel.com/)
+- **PHP :** version 8.0 ou supérieure
+- **Base de données :** Compatible avec MySQL, PostgreSQL, etc.
+- **Frontend :** Laravel Blade, CSS, JavaScript.
+- **Dépendances PHP principales :**
+    - `laravel/ui` : Pour le scaffolding de l'authentification.
+    - `maatwebsite/excel` : Pour l'importation et l'exportation de données (CSV, Excel).
+    - `barryvdh/laravel-dompdf` : Pour la génération de documents PDF.
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Suivez ces étapes pour installer et configurer le projet sur votre environnement de développement local.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1.  **Cloner le dépôt**
+    ```bash
+    git clone https://github.com/votre-utilisateur/faso-wifi.git
+    cd faso-wifi
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2.  **Installer les dépendances PHP**
+    ```bash
+    composer install
+    ```
 
-## Laravel Sponsors
+3.  **Installer les dépendances JavaScript**
+    ```bash
+    npm install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4.  **Configurer l'environnement**
+    Copiez le fichier d'exemple pour l'environnement et générez la clé d'application.
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-### Premium Partners
+5.  **Configurer la base de données**
+    Modifiez le fichier `.env` avec les informations de connexion à votre base de données (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6.  **Exécuter les migrations**
+    Créez les tables dans la base de données.
+    ```bash
+    php artisan migrate
+    ```
 
-## Contributing
+7.  **Lier le stockage**
+    Créez le lien symbolique pour le stockage des fichiers publics.
+    ```bash
+    php artisan storage:link
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Démarrage
 
-## Code of Conduct
+Pour lancer l'application, vous devez démarrer le serveur de développement Laravel et le compilateur d'assets Vite.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1.  **Lancer le serveur de développement**
+    ```bash
+    php artisan serve
+    ```
+    L'application sera accessible à l'adresse `http://127.0.0.1:8000`.
 
-## Security Vulnerabilities
+2.  **Compiler les assets (CSS/JS)**
+    Ouvrez un autre terminal et exécutez la commande suivante pour compiler les assets et les actualiser automatiquement lors des modifications.
+    ```bash
+    npm run dev
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# Faso-Wifi
+Le projet est maintenant prêt à être utilisé.
