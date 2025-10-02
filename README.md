@@ -1,90 +1,91 @@
-# Faso Wifi - Système de Gestion de Tickets WiFi
+# Faso-WIFI
 
-Faso Wifi est une application web conçue pour gérer la vente de tickets d'accès WiFi. Elle permet aux administrateurs de superviser les points d'accès, de définir des tarifs, de générer des tickets, de suivre les paiements et de gérer les utilisateurs.
+Système de gestion et de vente de tickets pour hotspots WiFi, développé avec le framework Laravel.
 
 ## Fonctionnalités Principales
 
-- **Gestion des Utilisateurs :** Inscription, connexion et gestion des comptes utilisateurs avec différents niveaux de droits.
-- **Gestion des Points d'Accès WiFi :** CRUD (Créer, Lire, Mettre à jour, Supprimer) pour les différents sites ou zones WiFi.
-- **Gestion des Tarifs :** CRUD pour les plans tarifaires (par exemple, par heure, par jour, par volume de données) associés à chaque point d'accès.
-- **Gestion des Tickets :**
-    - Génération de tickets individuels ou en masse.
-    - Importation de listes de tickets depuis des fichiers (CSV/Excel).
-    - Suivi de l'état des tickets (utilisé, non utilisé, expiré).
-- **Système de Paiement :**
-    - Intégration de solutions de paiement mobile pour l'achat de tickets.
-    - Suivi des transactions et génération de reçus.
-- **Génération de PDF :** Création de reçus de paiement au format PDF pour les clients.
-- **Gestion des Retraits :** Permet de suivre et de gérer les retraits de fonds effectués.
-- **Tableau de Bord :** Une interface d'administration pour visualiser les statistiques de ventes et l'état du système.
+-   **Vente de tickets en ligne** avec intégration probable de paiement mobile.
+-   **Génération de tickets d'accès** (nom d'utilisateur / mot de passe).
+-   **Panneau d'administration complet** pour la gestion du service.
+-   **Gestion des hotspots WiFi** et des **grilles tarifaires**.
+-   **Suivi des paiements** et de l'historique des transactions.
+-   **Importation de tickets en masse** depuis des fichiers CSV.
+-   **Système de revendeurs** avec gestion de soldes et de demandes de retrait.
 
-## Technologies et Dépendances
+---
 
-- **Framework :** [Laravel 9](https://laravel.com/)
-- **PHP :** version 8.0 ou supérieure
-- **Base de données :** Compatible avec MySQL, PostgreSQL, etc.
-- **Frontend :** Laravel Blade, CSS, JavaScript.
-- **Dépendances PHP principales :**
-    - `laravel/ui` : Pour le scaffolding de l'authentification.
-    - `maatwebsite/excel` : Pour l'importation et l'exportation de données (CSV, Excel).
-    - `barryvdh/laravel-dompdf` : Pour la génération de documents PDF.
+## Comment ça fonctionne ?
 
-## Installation
+L'application est divisée en deux interfaces distinctes : une pour le client final et une pour l'administrateur.
 
-Suivez ces étapes pour installer et configurer le projet sur votre environnement de développement local.
+### 1. Le Parcours du Client Final
 
-1.  **Cloner le dépôt**
-    ```bash
-    git clone https://github.com/votre-utilisateur/faso-wifi.git
-    cd faso-wifi
-    ```
+L'objectif du client est d'acheter un code pour se connecter au WiFi.
 
-2.  **Installer les dépendances PHP**
+1.  **Choix du forfait** : Le client choisit un forfait parmi ceux proposés (ex: "1 Heure", "1 Jour").
+2.  **Paiement** : Il est redirigé vers une page pour payer, probablement via son numéro de téléphone (paiement mobile).
+3.  **Confirmation** : Une fois le paiement validé sur son téléphone, l'application reçoit une confirmation.
+4.  **Génération du Ticket** : L'application génère instantanément un ticket avec un nom d'utilisateur et un mot de passe uniques.
+5.  **Affichage** : Le client voit son ticket à l'écran et peut télécharger un reçu en PDF. Une fonction de récupération de ticket est également disponible.
+
+### 2. Le Parcours de l'Administrateur
+
+L'administrateur se connecte à un tableau de bord pour piloter l'ensemble du service.
+
+1.  **Configuration** : Il peut ajouter/modifier les points d'accès WiFi et créer/mettre à jour les tarifs (prix, durée, etc.).
+2.  **Gestion des Opérations** :
+    -   Il consulte la liste de tous les tickets générés et leur statut.
+    -   Il peut importer des tickets en masse (pour la vente physique, par exemple).
+    -   Il suit en temps réel l'historique de toutes les transactions financières.
+3.  **Gestion des Revendeurs** :
+    -   Il gère les comptes des revendeurs.
+    -   Il suit leur solde qui augmente à chaque vente.
+    -   Il valide et traite leurs demandes de retrait d'argent.
+
+---
+
+## Installation et Lancement en Local
+
+Voici les étapes pour faire tourner le projet sur une machine de développement.
+
+### Prérequis
+
+-   PHP (>= 8.0)
+-   Composer
+-   Node.js & NPM
+-   Une base de données (MySQL ou MariaDB)
+
+### Étapes
+
+1.  **Installer les dépendances PHP :**
     ```bash
     composer install
     ```
 
-3.  **Installer les dépendances JavaScript**
+2.  **Installer les dépendances frontend :**
     ```bash
     npm install
     ```
 
-4.  **Configurer l'environnement**
-    Copiez le fichier d'exemple pour l'environnement et générez la clé d'application.
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
+3.  **Configurer l'environnement :**
+    -   Copiez le fichier d'exemple : `cp .env.example .env`
+    -   Générez la clé d'application : `php artisan key:generate`
 
-5.  **Configurer la base de données**
-    Modifiez le fichier `.env` avec les informations de connexion à votre base de données (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
+4.  **Base de données :**
+    -   Dans le fichier `.env`, configurez les accès à votre base de données locale (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
+    -   Lancez les migrations pour créer les tables :
+        ```bash
+        php artisan migrate
+        ```
 
-6.  **Exécuter les migrations**
-    Créez les tables dans la base de données.
-    ```bash
-    php artisan migrate
-    ```
+5.  **Lancer les serveurs de développement :**
+    -   Dans un premier terminal, lancez le serveur PHP :
+        ```bash
+        php artisan serve
+        ```
+    -   (Optionnel) Si vous modifiez le frontend (CSS/JS), lancez le serveur Vite dans un second terminal :
+        ```bash
+        npm run dev
+        ```
 
-7.  **Lier le stockage**
-    Créez le lien symbolique pour le stockage des fichiers publics.
-    ```bash
-    php artisan storage:link
-    ```
-
-## Démarrage
-
-Pour lancer l'application, vous devez démarrer le serveur de développement Laravel et le compilateur d'assets Vite.
-
-1.  **Lancer le serveur de développement**
-    ```bash
-    php artisan serve
-    ```
-    L'application sera accessible à l'adresse `http://127.0.0.1:8000`.
-
-2.  **Compiler les assets (CSS/JS)**
-    Ouvrez un autre terminal et exécutez la commande suivante pour compiler les assets et les actualiser automatiquement lors des modifications.
-    ```bash
-    npm run dev
-    ```
-
-Le projet est maintenant prêt à être utilisé.
+L'application sera accessible sur `http://127.0.0.1:8000`.
