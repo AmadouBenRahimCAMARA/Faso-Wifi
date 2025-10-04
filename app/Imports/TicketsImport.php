@@ -18,14 +18,16 @@ class TicketsImport implements ToModel
     */
     public function model(array $row)
     {
-        $user_id = Auth::user()->id;
+        $tarifId = session('current_import_tarif_id');
+        $userId = session('current_import_user_id');
+
         return new Ticket([
             'user'     => $row[0],
            'password'    => $row[1],
            'dure' => $row[2],
            'slug' => Str::slug(Str::random(10)),
-           'tarif_id' => Session::get("tarif_id"),
-           'user_id' => $user_id,
+           'tarif_id' => $tarifId,
+           'user_id' => $userId,
         ]);
     }
 }

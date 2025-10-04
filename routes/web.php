@@ -1,12 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\WifiController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\RetraitController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\LegacyPurchaseController;
+use App\Http\Controllers\LegacyTicketRetrievalController;
+use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\UtilityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,18 +24,25 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', function () {
-    return view('index');
-})->name("index");
+    return view('app');
+})->name("home");
 
-Route::get('/acheter-mon-ticket/{slug}', [Controller::class, 'acheter'])->name('acheter');
-Route::post('/faire-mon-paiement', [Controller::class, 'apiPaiement'])->name('apiPaiement');
-Route::get('/status', [Controller::class, 'statutPaiement'])->name('statutPaiement');
+// Routes du flux d'achat legacy
+Route::get('/acheter-mon-ticket/{slug}', [LegacyPurchaseController::class, 'acheter'])->name('acheter');
+Route::post('/faire-mon-paiement', [LegacyPurchaseController::class, 'apiPaiement'])->name('apiPaiement');
+Route::get('/status', [LegacyPurchaseController::class, 'statutPaiement'])->name('statutPaiement');
+Route::get('/acheter-mon-ticket/recu/{slug}', [LegacyPurchaseController::class, "recu"])->name("recu");
 
-Route::get('/acheter-mon-ticket/recu/{slug}',[Controller::class,"recu"])->name("recu");
-Route::get('/telecharger-mon-recu/{slug}',[Controller::class,"downloadRecu"]);
-Route::get('/recuperer-mon-ticket', [Controller::class, 'recuperationView'])->name('recuperation');
-Route::post('/recuperer-mon-ticket', [Controller::class, 'recuperationPost'])->name('recuperationPost');
-Route::get('/view-number/{slug}', [Controller::class, 'viewNumber'])->name('viewNumber');
+// Route de téléchargement de reçu (déjà refactorisée)
+Route::get('/telecharger-mon-recu/{slug}', [ReceiptController::class, "download"]);
+
+// Routes de récupération de ticket legacy
+Route::get('/recuperer-mon-ticket', [LegacyTicketRetrievalController::class, 'recuperationView'])->name('recuperation');
+Route::post('/recuperer-mon-ticket', [LegacyTicketRetrievalController::class, 'recuperationPost'])->name('recuperationPost');
+
+// Route utilitaire
+Route::get('/view-number/{slug}', [UtilityController::class, 'viewNumber'])->name('viewNumber');
+
 
 
 Route::get('/paiement-mobile', function () {
@@ -56,3 +68,50 @@ Route::resource('ticket', TicketController::class);
 Route::resource('tarifs', TarifController::class);
 Route::resource('paiement', PaiementController::class);
 Route::resource('retrait', RetraitController::class);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| V2 : Routes pour la nouvelle architecture de paiement (non destructive)
+|--------------------------------------------------------------------------
+|
+| Ces routes construisent le nouveau flux de paiement sécurisé en parallèle
+| de l'ancien système. L'application existante n'est pas modifiée.
+|
+*/
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\TicketRetrievalController;
+
+// Groupe de routes pour la V2
+Route::prefix('v2')->name('v2.')->group(function () {
+
+    // Étape 1: L'utilisateur initie l'achat
+    Route::post('/purchase/initiate', [PurchaseController::class, 'initiate'])->name('purchase.initiate');
+
+    // Étape 3: Récupération du ticket par le client
+    Route::get('/ticket/retrieve', [TicketRetrievalController::class, 'show'])->name('ticket.retrieve.show');
+    Route::post('/ticket/retrieve', [TicketRetrievalController::class, 'retrieve'])->name('ticket.retrieve.submit');
+
+    // --- Routes de SIMULATION pour le développement ---
+    // Page de simulation de paiement
+    Route::get('/purchase/simulate-payment/{paiement}', function(App\Models\Paiement $paiement) {
+        // Simule un formulaire de paiement qui renverra une confirmation.
+        return '<h2>Simulation de Paiement</h2>'
+            . '<p>Montant : ' . $paiement->tarif->montant . ' CFA</p>'
+            . '<p>Transaction ID local : ' . $paiement->id . '</p>'
+            . '<form action="'.route('api.v2.payment.webhook').'" method="POST">'
+            . '<input type="hidden" name="local_transaction_id" value="'.$paiement->id.'" />'
+            . '<input type="hidden" name="gateway_transaction_id" value="gw_'.Str::uuid().'" />'
+            . '<input type="hidden" name="payment_status" value="completed" />'
+            . '<button type="submit">Simuler un paiement RÉUSSI</button>'
+            . '</form><br>'
+            . '<form action="'.route('api.v2.payment.webhook').'" method="POST">'
+            . '<input type="hidden" name="local_transaction_id" value="'.$paiement->id.'" />'
+            . '<input type="hidden" name="gateway_transaction_id" value="gw_'.Str::uuid().'" />'
+            . '<input type="hidden" name="payment_status" value="failed" />'
+            . '<button type="submit">Simuler un paiement ÉCHOUÉ</button>'
+            . '</form>';
+    })->name('purchase.simulatePayment');
+});
+
