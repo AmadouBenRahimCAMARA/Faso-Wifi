@@ -28,7 +28,7 @@ class TarifController extends Controller
     public function index()
     {
         $datas = Auth::user()->tarifs()->latest()->paginate(10);
-        return view("admin.tarif-liste",compact("datas"));
+        return view("admin.tarifs.index",compact("datas"));
     }
 
     /**
@@ -39,7 +39,7 @@ class TarifController extends Controller
     public function create()
     {
         $wifi = Auth::user()->wifis()->get();
-        return view("admin.tarif-create", compact('wifi'));
+        return view("admin.tarifs.create", compact('wifi'));
     }
 
     /**
@@ -60,7 +60,7 @@ class TarifController extends Controller
         $request['slug'] = Str::slug(Str::random(10));
         $request['user_id'] = Auth::user()->id;
         Tarif::create($request->all());
-        return redirect('tarifs');
+        return redirect()->route('admin.tarifs.index');
     }
 
     /**
@@ -85,7 +85,7 @@ class TarifController extends Controller
         $wifi = Auth::user()->wifis()->get();
         $data = Tarif::where("slug", $slug)->first();
         if($data){
-            return view("admin.tarif-edit",compact("data","wifi"));
+            return view("admin.tarifs.edit",compact("data","wifi"));
         }else{
             return view('admin.404');
         }
@@ -111,7 +111,7 @@ class TarifController extends Controller
             'description' => 'required|string|max:1025',
         ]);
         $data->update($request->all());
-        return redirect('tarifs');
+        return redirect()->route('admin.tarifs.index');
     }
 
     /**
@@ -125,7 +125,7 @@ class TarifController extends Controller
         $data = Tarif::where("slug", $slug)->first();
         if($data){
             $data->delete();
-            return redirect("tarifs");
+            return redirect()->route('admin.tarifs.index');
         }else{
             return view('admin.404');
         }

@@ -27,7 +27,7 @@ class WifiController extends Controller
     {
         //dd(Auth::user()->wifis()->paginate(10));
         $datas = Auth::user()->wifis()->paginate(10);
-        return view("admin.wifi-liste",compact("datas"));
+        return view("admin.wifis.index",compact("datas"));
     }
 
     /**
@@ -37,7 +37,7 @@ class WifiController extends Controller
      */
     public function create()
     {
-        return view("admin.wifi-create");
+        return view("admin.wifis.create");
     }
 
     /**
@@ -54,9 +54,9 @@ class WifiController extends Controller
         ]);
         $request['slug'] = Str::slug(Str::random(10));
         $request['user_id'] = Auth::user()->id;
-        $wifi = wifi::create($request->all());
+        $wifi = Wifi::create($request->all());
 
-        return redirect('wifi');
+        return redirect()->route('wifi.index');
     }
 
     /**
@@ -80,7 +80,7 @@ class WifiController extends Controller
     {
         $data = Wifi::where("slug", $slug)->get()->first();
         if($data){
-            return view("admin.wifi-edit",compact("data"));
+            return view("admin.wifis.edit",compact("data"));
         }else{
             return view('admin.404');
         }
@@ -104,7 +104,7 @@ class WifiController extends Controller
             'description' => 'required|string|max:1025',
         ]);
         $data->update($request->all());
-        return redirect('wifi');
+        return redirect()->route('wifi.index');
     }
 
     /**
@@ -118,7 +118,7 @@ class WifiController extends Controller
         $data = Wifi::where("slug", $slug)->first();
         if($data){
             $data->delete();
-            return redirect("wifi");
+            return redirect()->route('wifi.index');
         }else{
             return view('admin.404');
         }

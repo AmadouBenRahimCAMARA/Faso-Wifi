@@ -1,7 +1,32 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #ffffff; // Pure white background
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: 'Poppins', sans-serif;
+$font-size-base: 1rem;
 $line-height-base: 1.6;
+
+// Custom Colors (Strictly Blue, White, Red, Green)
+$blue:    #3399FF; // A balanced, vibrant primary blue
+$red:     #dc3545; // Danger Red
+$green:   #28a745; // Success Green
+$white:   #ffffff; // Pure White
+
+// Define a very light gray for subtle borders/separators, but not for main backgrounds
+$light-gray: #e9ecef; // Slightly darker light gray for borders
+
+// Overriding Bootstrap's default theme colors
+$primary:       $blue;
+$secondary:     $green; // Using green as secondary for actions
+$success:       $green;
+$info:          $blue; // Can use blue for info
+$warning:       #ffc107; // Yellow for warning (standard, not part of main 4)
+$danger:        $red;
+$light:         $light-gray; // Using light-gray for light elements
+$dark:          #343a40; // Dark for text/footer background (can be adjusted if needed)
+
+// Additional custom colors for specific elements if needed
+$faso-blue: #3399FF;
+$faso-green: #28a745;
+$faso-red: #dc3545;
+$faso-white: #ffffff;

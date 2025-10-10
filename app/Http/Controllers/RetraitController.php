@@ -21,47 +21,8 @@ class RetraitController extends Controller
      */
     public function index()
     {
-        {
-            //dd($request->view);
-            $limit = "";
-            $datas = Auth::user()->retraits()->latest()->paginate(10);
-            $user = Auth::user();
-
-            $dateDuJour = Carbon::today(); // Récupère la date d'aujourd'hui
-
-            //$retrait = Retrait::latest()->paginate(10);
-
-            $ticketsDuJour = Ticket::whereDate('updated_at', $dateDuJour)
-                            ->where([
-                            'etat_ticket' => 'VENDU',
-                            'user_id' => Auth::user()->id])
-                            ->get();
-
-            $ticketsTotalVendu = Ticket::where([
-                            'etat_ticket' => 'VENDU',
-                            'user_id' => Auth::user()->id])
-                            ->get();
-
-
-            //$solde = Solde::whereDate('updated_at', $dateDuJour)->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
-            $solde = Solde::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
-            $soldesDuJour = 0;
-            foreach($ticketsDuJour as $ticket){
-                $soldesDuJour = $soldesDuJour + $ticket->tarif->montant;
-            }
-
-
-            $montant = isset($solde) ? $solde->solde : 0;
-            $compte = [
-                "solde_total" => $montant,
-                "retrait_total" => $montant - (25 * $montant)/100,
-                "solde_du_jour" => $soldesDuJour,
-                "ticket_du_jour_vendu" => count($ticketsDuJour),
-                "ticket_total_vendu" => count($ticketsTotalVendu),
-            ];
-
-            return view("admin.retrait-liste",compact("datas","limit","user","compte"));
-        }
+        $datas = Auth::user()->retraits()->latest()->paginate(10);
+        return view("admin.retraits.index",compact("datas"));
     }
 
     /**
@@ -72,10 +33,10 @@ class RetraitController extends Controller
     public function create()
     {
         $dateDuJour = Carbon::today(); // Récupère la date d'aujourd'hui
-        $solde = Solde::whereDate('updated_at', $dateDuJour)->orderBy('id', 'desc')->first();
+        $solde = Solde::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
         $montant = isset($solde) ? $solde->solde : 0;
         $retrait = $montant - (25 * $montant)/100;
-        return view("admin.retrait-create", compact('retrait'));
+        return view("admin.retraits.create", compact('retrait'));
     }
 
     /**
@@ -120,7 +81,7 @@ class RetraitController extends Controller
                 ]);
             });
 
-            return redirect()->route('paiement.retrait')->with('success', 'Votre demande de retrait a été soumise avec succès.');
+            return redirect()->route('retrait.index')->with('success', 'Votre demande de retrait a été soumise avec succès.');
 
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Une erreur est survenue lors de la soumission de votre demande. Veuillez réessayer.']);
@@ -144,9 +105,10 @@ class RetraitController extends Controller
      * @param  \App\Models\Retrait  $retrait
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(Retrait $retrait)
+    public function edit($slug)
     {
-        return back();
+        $data = Retrait::where("slug", $slug)->firstOrFail();
+        return view("admin.retraits.edit",compact("data"));
     }
 
     /**
@@ -156,9 +118,14 @@ class RetraitController extends Controller
      * @param  \App\Models\Retrait  $retrait
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Retrait $retrait)
+    public function update(Request $request, $slug)
     {
-        return back();
+        $data = Retrait::where('slug', $slug)->firstOrFail();
+        $request->validate([
+            'statut' => 'required|in:en attente,approuvé,rejeté',
+        ]);
+        $data->update($request->all());
+        return redirect()->route('retrait.index')->with('success', 'Statut de retrait mis à jour avec succès!');
     }
 
     /**

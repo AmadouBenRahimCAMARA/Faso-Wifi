@@ -30,7 +30,7 @@ class PaiementController extends Controller
         //dd($request->view);
         $limit = session()->has('view') ? session()->get('view') : 10;
         $datas = Auth::user()->paiements()->latest()->paginate(10);
-        return view("admin.paiement-liste",compact("datas","limit"));
+        return view("admin.paiements.index",compact("datas","limit"));
     }
 
     /**

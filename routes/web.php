@@ -11,6 +11,9 @@ use App\Http\Controllers\LegacyPurchaseController;
 use App\Http\Controllers\LegacyTicketRetrievalController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\PublicTarifController; // Import the new controller
+use App\Http\Controllers\ServiceController; // Import the new controller
+use App\Http\Controllers\ContactController; // Import the new controller
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +26,20 @@ use App\Http\Controllers\UtilityController;
 |
 */
 
+// Public Homepage
 Route::get('/', function () {
-    return view('app');
+    return view('home'); // This is our public homepage with hero section
 })->name("home");
+
+// Public Services Page
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+
+// Public Tariffs Page
+Route::get('/tarifs', [PublicTarifController::class, 'index'])->name('tarifs.index');
+
+// Public Contact Page
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Routes du flux d'achat legacy
 Route::get('/acheter-mon-ticket/{slug}', [LegacyPurchaseController::class, 'acheter'])->name('acheter');
@@ -61,14 +75,20 @@ Route::get('/inscription', function () {
 
 Auth::routes();
 
+// Authenticated User Dashboard
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/paiement/retrait', [PaiementController::class, 'retrait'])->name('paiement.retrait');
 Route::resource('wifi', WifiController::class);
 Route::resource('ticket', TicketController::class);
-Route::resource('tarifs', TarifController::class);
+// Removed conflicting Route::resource('tarifs', TarifController::class);
 Route::resource('paiement', PaiementController::class);
 Route::resource('retrait', RetraitController::class);
 
+// Admin Tariffs (authenticated)
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('tarifs', TarifController::class);
+});
 
 
 /*
@@ -114,4 +134,3 @@ Route::prefix('v2')->name('v2.')->group(function () {
             . '</form>';
     })->name('purchase.simulatePayment');
 });
-

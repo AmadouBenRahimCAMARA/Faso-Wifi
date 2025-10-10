@@ -7,7 +7,7 @@ use App\Models\Tarif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Imports\TicketsImport;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +35,7 @@ class TicketController extends Controller
     public function index()
     {
         $datas = Auth::user()->tickets()->latest()->paginate(10);
-        return view("admin.ticket-liste",compact("datas"));
+        return view("admin.tickets.index",compact("datas"));
     }
 
     /**
@@ -46,7 +46,7 @@ class TicketController extends Controller
     public function create()
     {
         $tarifs = Auth::user()->tarifs()->get();
-        return view("admin.ticket-create", compact('tarifs'));
+        return view("admin.tickets.create", compact('tarifs'));
     }
 
     /**
@@ -57,27 +57,21 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        Session::put('tarif_id', $request->tarif_id);
-
-
-        $file = $request->file('fichier'); // Retrieve the uploaded file from the request
-        $fileName = Str::random(10) . '.' . $request->fichier->getClientOriginalExtension();
-        // Enregistrer l'image dans le dossier public/images
-        $filePath = $request->fichier->move(public_path('files'), $fileName);
-        Excel::import(new TicketsImport, $filePath);
-        Storage::delete($filePath);
-
-        /*$request->validate([
-            'forfait' => 'required|string|max:255',
-            'montant' => 'required|string|max:255',
-            'wifi_id' => 'required|string|max:255',
-            'description' => 'required|string|max:1025',
+        $request->validate([
+            'tarif_id' => 'required|exists:tarifs,id',
+            'fichier' => 'required|mimes:csv,txt|max:2048', // Validate file upload
         ]);
 
-        $request['slug'] = Str::slug(Str::random(10));
-        Ticket::create($request->all());*/
-        return redirect('ticket');
+        Session::put('tarif_id', $request->tarif_id);
+
+        $file = $request->file('fichier');
+        $fileName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $filePath = $file->storeAs('public/files', $fileName); // Store in storage/app/public/files
+
+        Excel::import(new TicketsImport, storage_path('app/' . $filePath));
+        Storage::delete($filePath);
+
+        return redirect()->route('ticket.index')->with('success', 'Tickets importés avec succès!');
     }
 
     /**
@@ -99,10 +93,10 @@ class TicketController extends Controller
      */
     public function edit($slug)
     {
-        $tarif = Auth::user()->tarifs()->get();
+        $tarifs = Auth::user()->tarifs()->get();
         $data = Ticket::where("slug", $slug)->first();
         if($data){
-            return view("admin.tarif-edit",compact("data","tarif"));
+            return view("admin.tickets.edit",compact("data","tarifs"));
         }else{
             return view('admin.404');
         }
@@ -122,13 +116,14 @@ class TicketController extends Controller
             return view("admin.404");
         }
         $request->validate([
-            'forfait' => 'required|string|max:255',
-            'montant' => 'required|string|max:255',
-            'wifi_id' => 'required|string|max:255',
-            'description' => 'required|string|max:1025',
+            'user' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'dure' => 'required|string|max:255',
+            'etat_ticket' => 'required|string|max:255',
+            'tarif_id' => 'required|exists:tarifs,id',
         ]);
         $data->update($request->all());
-        return redirect('tickets');
+        return redirect()->route('ticket.index')->with('success', 'Ticket mis à jour avec succès!');
     }
 
     /**
@@ -143,7 +138,7 @@ class TicketController extends Controller
 
         if($data){
             $data->delete();
-            return redirect("ticket");
+            return redirect()->route('ticket.index')->with('success', 'Ticket supprimé avec succès!');
         }else{
             return view('admin.404');
         }

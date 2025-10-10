@@ -1,4 +1,4 @@
-# Faso-WIFI
+# WiLink-Tickets
 
 Système de gestion et de vente de tickets pour hotspots WiFi, développé avec le framework Laravel.
 
