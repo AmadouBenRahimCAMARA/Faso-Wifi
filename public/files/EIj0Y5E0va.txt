@@ -1,0 +1,6 @@
+/ip hotspot user
+add name="Qpbtg4754" password="Qpbtg4754" profile="30Minutes-Online" comment="vc-630-10.19.24-" limit-uptime="30s"
+add name="Qkbpn3732" password="Qkbpn3732" profile="30Minutes-Online" comment="vc-630-10.19.24-" limit-uptime="30s"
+add name="Qprvr8465" password="Qprvr8465" profile="30Minutes-Online" comment="vc-630-10.19.24-" limit-uptime="30s"
+add name="Qwpzg9244" password="Qwpzg9244" profile="30Minutes-Online" comment="vc-630-10.19.24-" limit-uptime="30s"
+add name="Qysze3834" password="Qysze3834" profile="30Minutes-Online" comment="vc-630-10.19.24-" limit-uptime="30s"
