@@ -6,7 +6,7 @@
         <div class="container" data-aos="zoom-out" data-aos-delay="100">
             <div class="row">
                 <div class="col-xl-6">
-                    <h1>Bienvenue sur faso wifi</h1>
+                    <h1>Bienvenue sur WiLink Tickets</h1>
                     <h2>Votre Plateforme de Vente de Tickets WiFi Simplifiée</h2>
                     <a href="{{ route('inscription') }}" class="btn-get-started scrollto">Créer mon compte</a>
                 </div>
@@ -25,13 +25,12 @@
                     <div class="tab-pane active show" id="tab-1">
                         <div class="row">
                             <div class="col-lg-6  mt-3 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
-                                <h3>A propos de FASO WIFI</h3>
+                                <h3>A propos de WiLink Tickets</h3>
                                 <p class="">
-                                    <span class="fw-bold">FASO
-                                        WIFI</span> est une plateforme innovante, conçue pour révolutionner la façon dont
+                                    <span class="fw-bold">WiLink Tickets</span> est une plateforme innovante, conçue pour révolutionner la façon dont
                                     les vendeurs de WiFi Zone vendent leurs tickets de connexion en ligne. Grâce à <span
-                                        class="fw-bold">FASO
-                                        WIFI</span>, la vente de tickets devient plus simple, plus pratique et plus
+                                        class="fw-bold">WiLink Tickets
+                                       </span>, la vente de tickets devient plus simple, plus pratique et plus
                                     sécurisée que
                                     jamais, permettant aux clients d'acheter des tickets de connexion depuis n'importe où
                                     via des moyens de paiement mobiles populaires tels que Orange Money, Moov Money, Carte
@@ -39,8 +38,7 @@
                                     Ligdicash.
                                 </p>
                                 <p class="fst-italic1">
-                                    Avec <span class="fw-bold">FASO
-                                        WIFI</span>, vous pouvez gérer votre activité de vente de tickets WiFi Zone de
+                                    Avec <span class="fw-bold">WiLink Tickets</span>, vous pouvez gérer votre activité de vente de tickets WiFi Zone de
                                     manière efficace et sans tracas. Plus besoin pour vos clients de se déplacer
                                     physiquement pour acheter des tickets, tout se fait en ligne, offrant ainsi une
                                     commodité inégalée
@@ -54,8 +52,7 @@
                                                             intégrées pour offrir une expérience de paiement fluide.
                                                         </p-->
                                 <p>
-                                    Pour les vendeurs de WiFi Zone, <span class="fw-bold">FASO
-                                        WIFI</span> offre un processus d'inscription rapide et
+                                    Pour les vendeurs de WiFi Zone, <span class="fw-bold">WiLink Tickets</span> offre un processus d'inscription rapide et
                                     convivial :
                                 </p>
                                 <ul>
@@ -74,8 +71,7 @@
                                         confiance et en toute sécurité.</li>
                                 </ul>
                                 <p>
-                                    <span class="fw-bold">FASO
-                                        WIFI</span>, offrez à vos clients une expérience d'achat de tickets fluide et
+                                    <span class="fw-bold">WiLink Tickets</span>, offrez à vos clients une expérience d'achat de tickets fluide et
                                     sécurisée, tout en simplifiant la gestion de votre activité. Joignez-vous à nous dès
                                     aujourd'hui et transformez votre façon de vendre des tickets WiFizone !
                                 </p>
@@ -112,7 +108,7 @@
                                 <div class="info-box mt-4">
                                     <i class="bx bx-envelope"></i>
                                     <h3>Email</h3>
-                                    <p>info@fasowifi.com</p>
+                                    <p>info@wilinktickets.com</p>
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -149,10 +149,10 @@
                 </div>
                 <div class="column postion-relative">
                     <p class="text-center text-uppercase postion-absolute-top1 pt-2 w-100">
-                        <img width="120px" src="./Logo.png" alt="LOGO FASO WIFI" /> <br />
-                        <span class="text-uppercase">FASO WIFI </span><br />
+                        <img width="120px" src="./Logo.png" alt="LOGO WiLink Tickets" /> <br />
+                        <span class="text-uppercase">WiLink Tickets</span><br />
                         <span class="text-uppercase">+226 xx xx xx xx </span><br />
-                        <span class="text-uppercase">info@fasowifi.com </span><br />
+                        <span class="text-uppercase">info@wilinktickets.com </span><br />
                         <span class="text-uppercase">Bobo-Dioulasso, Burkina Faso </span><br />
                     </p>
                 </div>

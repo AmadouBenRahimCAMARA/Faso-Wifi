@@ -20,7 +20,7 @@
                     class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
                     href="{{ route('index') }}">
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-wifi"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>FASO WIFI</span></div>
+                    <div class="sidebar-brand-text mx-3"><span>WiLink Tickets</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">

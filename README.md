@@ -1,4 +1,4 @@
-# Faso-Wifi - Gestion de Vente de Tickets WiFi
+# WiLink Tickets - Gestion de Vente de Tickets WiFi
 
 Faso-Wifi est une application web développée avec le framework Laravel 9, conçue pour la gestion et la vente de tickets d'accès WiFi. Elle permet aux administrateurs de créer et gérer des points d'accès WiFi, de définir des tarifs, de générer des tickets, de suivre les ventes et de gérer les revenus générés.
 
