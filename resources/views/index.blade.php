@@ -17,71 +17,48 @@
 
     <main id="main">
 
-        <!-- ======= Tabs Section ======= -->
-        <section id="about" class="tabs">
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
             <div class="container" data-aos="fade-up">
-
-                <div class="tab-content">
-                    <div class="tab-pane active show" id="tab-1">
-                        <div class="row">
-                            <div class="col-lg-6  mt-3 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
-                                <h3>A propos de WiLink Tickets</h3>
-                                <p class="">
-                                    <span class="fw-bold">WiLink Tickets</span> est une plateforme innovante, conçue pour révolutionner la façon dont
-                                    les vendeurs de WiFi Zone vendent leurs tickets de connexion en ligne. Grâce à <span
-                                        class="fw-bold">WiLink Tickets
-                                       </span>, la vente de tickets devient plus simple, plus pratique et plus
-                                    sécurisée que
-                                    jamais, permettant aux clients d'acheter des tickets de connexion depuis n'importe où
-                                    via des moyens de paiement mobiles populaires tels que Orange Money, Moov Money, Carte
-                                    Visa et
-                                    Ligdicash.
-                                </p>
-                                <p class="fst-italic1">
-                                    Avec <span class="fw-bold">WiLink Tickets</span>, vous pouvez gérer votre activité de vente de tickets WiFi Zone de
-                                    manière efficace et sans tracas. Plus besoin pour vos clients de se déplacer
-                                    physiquement pour acheter des tickets, tout se fait en ligne, offrant ainsi une
-                                    commodité inégalée
-                                </p>
-                            </div>
-                            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                                <!--p class="fst-italic">
-                                                            Notre plateforme prend en charge une variété de moyens de paiement mobiles de la zone
-                                                            UEMOA, vous assurant ainsi de pouvoir atteindre un large éventail de clients. Des
-                                                            options telles que Flooz, Tmoney, MTN, Orange, et bien d'autres encore, sont toutes
-                                                            intégrées pour offrir une expérience de paiement fluide.
-                                                        </p-->
-                                <p>
-                                    Pour les vendeurs de WiFi Zone, <span class="fw-bold">WiLink Tickets</span> offre un processus d'inscription rapide et
-                                    convivial :
-                                </p>
-                                <ul>
-                                    <li><i class="ri-check-double-line"></i>Inscrivez-vous en quelques étapes simples.</li>
-                                    <li><i class="ri-check-double-line"></i>Connectez-vous à votre espace membre
-                                        personnalisé.</li>
-                                    <li><i class="ri-check-double-line"></i>Enregistrez rapidement votre WiFizone et
-                                        configurez vos paramètres.</li>
-                                    <li><i class="ri-check-double-line"></i>Créez des tarifs flexibles et adaptables à vos
-                                        besoins commerciaux.</li>
-                                    <li><i class="ri-check-double-line"></i>Importez facilement vos tickets pour une gestion
-                                        efficace des stocks.</li>
-                                    <li><i class="ri-check-double-line"></i>Intégrez sans effort la plateforme "TICKET WIFI"
-                                        à votre système Hotspot existant.</li>
-                                    <li><i class="ri-check-double-line"></i>Commencez à vendre vos tickets en ligne en toute
-                                        confiance et en toute sécurité.</li>
-                                </ul>
-                                <p>
-                                    <span class="fw-bold">WiLink Tickets</span>, offrez à vos clients une expérience d'achat de tickets fluide et
-                                    sécurisée, tout en simplifiant la gestion de votre activité. Joignez-vous à nous dès
-                                    aujourd'hui et transformez votre façon de vendre des tickets WiFizone !
-                                </p>
-                            </div>
+                <div class="about-box-floating">
+                    <div class="row">
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <h3>A propos de WiLink Tickets</h3>
+                            <p class="">
+                                <span class="fw-bold">WiLink Tickets</span> est une plateforme innovante, conçue pour révolutionner la façon dont
+                                les vendeurs de WiFi Zone vendent leurs tickets de connexion en ligne. Grâce à <span
+                                    class="fw-bold">WiLink Tickets
+                                   </span>, la vente de tickets devient plus simple, plus pratique et plus
+                                sécurisée que
+                                jamais.
+                            </p>
+                            <p class="fst-italic1">
+                                Avec <span class="fw-bold">WiLink Tickets</span>, vous pouvez gérer votre activité de vente de tickets WiFi Zone de
+                                manière efficace et sans tracas. Plus besoin pour vos clients de se déplacer
+                                physiquement pour acheter des tickets, tout se fait en ligne.
+                            </p>
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                            <p>
+                                Pour les vendeurs de WiFi Zone, <span class="fw-bold">WiLink Tickets</span> offre un processus d'inscription rapide et
+                                convivial :
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i>Inscrivez-vous en quelques étapes simples.</li>
+                                <li><i class="ri-check-double-line"></i>Connectez-vous à votre espace membre
+                                    personnalisé.</li>
+                                <li><i class="ri-check-double-line"></i>Enregistrez rapidement votre WiFizone et
+                                    configurez vos paramètres.</li>
+                                <li><i class="ri-check-double-line"></i>Créez des tarifs flexibles et adaptables à vos
+                                    besoins commerciaux.</li>
+                                <li><i class="ri-check-double-line"></i>Importez facilement vos tickets pour une gestion
+                                    efficace des stocks.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </section><!-- End Tabs Section -->
+        </section><!-- End About Section -->
 
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">

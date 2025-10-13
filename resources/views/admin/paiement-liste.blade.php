@@ -62,13 +62,13 @@
                                         </td>
                                         <td>{{ $values->moyen_de_paiement }}</td>
                                         <td>{{ App\Models\Ticket::find($values->ticket_id)->tarif->montant . ' FCFA' }}</td>
-                                        <td>
-                                            <a href="" class="btn btn-primary"
+                                        <td class="d-flex justify-content-start align-items-center">
+                                            <a href="" class="btn btn-primary btn-fixed-width me-1 mb-1"
                                                 data-bs-target="#view{{ $values->slug }}" data-bs-toggle="modal">Voir</a>
                                             <!--a href="{{ route('wifi.edit', $values->slug) }}"
-                                                class="btn btn-warning">Editer</a>
+                                                class="btn btn-warning btn-fixed-width me-1 mb-1">Editer</a>
 
-                                            <button href="" class="btn btn-danger" data-bs-target="#delete{{ $values->slug }}"
+                                            <button href="" class="btn btn-danger btn-fixed-width me-1 mb-1" data-bs-target="#delete{{ $values->slug }}"
                                                 data-bs-toggle="modal">Supprimer</button>
 
                                             <div class="modal fade" id="delete{{ $values->slug }}" tabindex="-1"
@@ -101,6 +101,7 @@
                                                     </div>
                                                 </div>
                                             </div-->
+                                        </td>
                                             <div class="modal fade" id="view{{ $values->slug }}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">

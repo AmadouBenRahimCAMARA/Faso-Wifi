@@ -57,16 +57,17 @@
                                         <th>{{ $values->nom }}</th>
                                         <th>{{ $values->description }}</th>
                                         <th>{{ date_format($values->created_at, 'd/m/Y H:i:s') }}</th>
-                                        <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCopier" onclick="copyCode('{{$values->slug}}')">copier le code</button></td>
-                                        <th>
-                                            <a href="" class="btn btn-primary"
+                                        <td><button class="btn btn-primary btn-fixed-width" data-bs-toggle="modal" data-bs-target="#modalCopier" onclick="copyCode('{{$values->slug}}')">copier le code</button></td>
+                                        <th class="d-flex justify-content-start align-items-center">
+                                            <a href="" class="btn btn-primary btn-fixed-width me-1 mb-1"
                                                 data-bs-target="#view{{ $values->slug }}" data-bs-toggle="modal">Voir</a>
                                             <a href="{{ route('wifi.edit', $values->slug) }}"
-                                                class="btn btn-warning">Editer</a>
+                                                class="btn btn-warning btn-fixed-width me-1 mb-1">Editer</a>
 
-                                            <button href="" class="btn btn-danger"
+                                            <button href="" class="btn btn-danger btn-fixed-width me-1 mb-1"
                                                 data-bs-target="#delete{{ $values->slug }}"
                                                 data-bs-toggle="modal">Supprimer</button>
+
 
                                             <div class="modal fade" id="delete{{ $values->slug }}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -11456,3 +11456,124 @@ header.masthead h1, header.masthead .h1 {
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption, #portfolio .container-sm .portfolio-box:hover .portfolio-box-caption, #portfolio .container-md .portfolio-box:hover .portfolio-box-caption, #portfolio .container-lg .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
 }
+/* Custom Sidebar Link Colors for Readability */
+#accordionSidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#accordionSidebar .nav-link.active,
+#accordionSidebar .nav-link:hover {
+  color: #fff;
+}
+
+
+/* Admin Search Icon Button Styling */
+.navbar-search .btn-primary {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.navbar-search .btn-primary:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+
+/* Admin Dashboard Card Colors */
+.text-primary {
+  color: #198754 !important;
+}
+
+a.text-primary:hover {
+  color: #157347 !important;
+}
+
+.border-start-primary {
+  border-left: 0.25rem solid #198754 !important;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+a.text-success:hover {
+  color: #157347 !important;
+}
+
+.border-start-success {
+  border-left: 0.25rem solid #198754 !important;
+}
+
+
+/* Modern Table Styling for Admin Lists */
+.table-responsive .table {
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Space between rows */
+}
+
+.table-responsive .table th,
+.table-responsive .table td {
+  padding: 15px; /* More padding */
+  vertical-align: middle;
+  border-top: 1px solid #e3e6f0; /* Light border */
+  color: #fff; /* White text for readability */
+}
+
+.table-responsive .table thead th {
+  background-color: #f8f9fc; /* Light header background */
+  color: #5a5c69;
+  font-weight: bold;
+  border-bottom: none;
+}
+
+.table-responsive .table tbody tr {
+  background-color: #2196F3; /* Blue background for rows */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for floating effect */
+  border-radius: 8px; /* Rounded corners for rows */
+  transition: all 0.2s ease-in-out;
+}
+
+.table-responsive .table tbody tr:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust action buttons */
+.table-responsive .table tbody tr td:last-child .btn {
+  margin-right: 5px;
+}
+
+
+/* Admin Primary Button Styling (Green) */
+.btn-primary {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-primary:hover {
+  background-color: #157347;
+  border-color: #157347;
+}
+
+
+/* Admin Warning Button Styling (Black) */
+.btn-warning {
+  background-color: #212529;
+  border-color: #212529;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+
+/* Fixed width for action buttons in admin tables */
+.btn-fixed-width {
+  width: 150px; /* Adjust as needed */
+  text-align: center;
+  display: inline-block; /* Ensure width applies correctly */
+}
+
